@@ -14,7 +14,6 @@ $("td").click(function(){
   $(this).html(currentPlayer);
  console.log($(this).data("id"));
  console.log(boardStatus);
- //function checkStatus(){
   if (winGame() === true){
     alert("Player" + currentPlayer + "  Win!")
   console.log(winGame());
