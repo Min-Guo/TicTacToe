@@ -10,13 +10,15 @@ function player2choice(){
 }
 
 $("td").click(function(){
-  boardStatus[$(this).data("id")] = currentPlayer;
-  $(this).html(currentPlayer);
- console.log($(this).data("id"));
- console.log(boardStatus);
-  if (winGame() === true){
-    alert("Player" + currentPlayer + "  Win!")
-  console.log(winGame());
+  if (currentPlayer !== 0){
+    boardStatus[$(this).data("id")] = currentPlayer;
+    $(this).html(currentPlayer);
+  console.log($(this).data("id"));
+  console.log(boardStatus);
+    if (winGame() === true){
+      alert("Player" + currentPlayer + "  Win!")
+    console.log(winGame());
+    }
   }
 })
 
