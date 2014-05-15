@@ -1,6 +1,9 @@
 var currentPlayer= 0;
 
+var i =0;
+
 var boardStatus = [0,0,0,0,0,0,0,0,0];
+
 
 function player1choice(){
   currentPlayer =1;
@@ -19,6 +22,10 @@ $("td").click(function(){
         if (winGame() === true){
           alert("Player" + currentPlayer + "  Win!")
           console.log(winGame());
+        }
+        if ($.inArray(0, boardStatus) === -1 &&
+          winGame()!== true){
+          alert("Tie!")
         }
   }
 })
@@ -65,4 +72,7 @@ function winGame(){
     return true;
   }
 }
+
+
+
 
