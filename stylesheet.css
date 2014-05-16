@@ -2,10 +2,10 @@
 	width:200px;
     height:200px;
     text-align:center;
+    border:groove;
 }
 .insertStyle{
 	font-size: 160px;
 	font-weight: bold;
-	font-style: normal;
-
+	font-style: normal；
 }
