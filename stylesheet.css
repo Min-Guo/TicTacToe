@@ -1,5 +1,11 @@
-.tdclass{
-  width:200px;
-  height:200px;
-  text-align:center;
+.tdClass{
+	width:200px;
+    height:200px;
+    text-align:center;
+}
+.insertStyle{
+	font-size: 160px;
+	font-weight: bold;
+	font-style: normal;
+
 }

@@ -6,14 +6,14 @@ var boardStatus = [0,0,0,0,0,0,0,0,0];
 $("td").click(function(){
   if (boardStatus[$(this).data("id")] === 0){
       boardStatus[$(this).data("id")] = 1;
-      $(this).html("O");
+      $(this).addClass("insertStyle").html("O");
       console.log($(this).data("id"));
       console.log(boardStatus);
       var a = randomId();
       boardStatus[a]= 2;
       console.log(a);
       console.log(boardStatus);
-      $("td:eq(" + a + ")").html("X");
+      $("td:eq(" + a + ")").addClass("insertStyle").html("X");
       if (winGame() === true){
           alert("Player" + currentPlayer + "  Win!")
           console.log(winGame());
