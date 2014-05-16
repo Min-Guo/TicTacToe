@@ -1,34 +1,40 @@
-var currentPlayer= 0;
-
-var i =0;
+var currentPlayer= 1;
 
 var boardStatus = [0,0,0,0,0,0,0,0,0];
 
 
-function player1choice(){
-  currentPlayer =1;
-}
-function player2choice(){
-  currentPlayer =2;
-}
-
 $("td").click(function(){
-  if (currentPlayer !== 0 &&
-    boardStatus[$(this).data("id")] === 0){
-      boardStatus[$(this).data("id")] = currentPlayer;
-      $(this).html(currentPlayer);
+  if (boardStatus[$(this).data("id")] === 0){
+      boardStatus[$(this).data("id")] = 1;
+      $(this).html("O");
       console.log($(this).data("id"));
       console.log(boardStatus);
-        if (winGame() === true){
+      var a = randomId();
+      boardStatus[a]= 2;
+      console.log(a);
+      console.log(boardStatus);
+      $("td:eq(" + a + ")").html("X");
+      if (winGame() === true){
           alert("Player" + currentPlayer + "  Win!")
           console.log(winGame());
-        }
-        if ($.inArray(0, boardStatus) === -1 &&
+      }
+      if ($.inArray(0, boardStatus) === -1 &&
           winGame()!== true){
           alert("Tie!")
-        }
-  }
+      }
+  }   
 })
+function generateNumber(){
+  return Math.floor(Math.random() * 9);
+}
+
+function randomId(){
+  var randomNumber = generateNumber();
+  while (boardStatus[randomNumber] !== 0){
+    randomNumber = generateNumber()
+  } 
+    return randomNumber;
+}
 
 function winGame(){
   if ( boardStatus[0] === currentPlayer
