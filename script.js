@@ -29,16 +29,17 @@ function checkPlayer(){
   if (gameStatus(1) === true){
     resetTable();
   } else{
-      var computerId = randomId()
-      boardStatus[computerId]= 2;
-      insertCharacter(computerId);
-      checkComputer();
+    updateComputer();
   }
 }
 
 function updateComputer(){
-  // body...
+  var computerId = randomId()
+  boardStatus[computerId]= 2;
+  insertCharacter(computerId);
+  checkComputer(); 
 }
+
 function checkComputer(){
   if (gameStatus(2) === true){
     resetTable();
