@@ -1,31 +1,59 @@
-var currentPlayer= 1;
+var x= 1;
 
 var boardStatus = [0,0,0,0,0,0,0,0,0];
 
 
 $("td").click(function(){
   if (boardStatus[$(this).data("id")] === 0){
-      boardStatus[$(this).data("id")] = 1;
-      $(this).addClass("insertStyle").html("O");
-      gameStatus();
-      //console.log($(this).data("id"));
-      //console.log(boardStatus);
-      var a = randomId()
-      boardStatus[a]= 2;
-      //console.log(a);
-      //console.log(boardStatus);
-      $("td:eq(" + a + ")").addClass("insertStyle").html("X");  
+      var clickId = $(this).data("id");
+      boardStatus[clickId] = 1;
+      insertCharacter(clickId);
+      checkPlayer();    
   }   
 })
 
-function gameStatus(){
-  if (winGame() === true){
-    alert("Player" + currentPlayer + "  Win!")
-    console.log(winGame());
+function updateStatus(x, y){
+  boardStatus[x] = y;
+}
+
+function insertCharacter(x){
+  if (boardStatus[x] === 1){
+    $("td:eq(" + x + ")").addClass("insertStyle").html("O");
+  }
+  if (boardStatus[x] === 2){
+    $("td:eq(" + x + ")").addClass("insertStyle").html("X");
+  }
+}
+function checkPlayer(){
+  if (gameStatus(1) === true){
+    resetTable();
+  } else{
+      var computerId = randomId()
+      boardStatus[computerId]= 2;
+      insertCharacter(computerId);
+      checkComputer();
+  }
+}
+
+function checkComputer(){
+  if (gameStatus(2) === true){
+    resetTable();
+  }
+}
+function resetTable(){
+  boardStatus = [0,0,0,0,0,0,0,0,0];
+  $("td").html("");
+}
+
+function gameStatus(x){
+  if (winGame(x) === true){
+    alert("You Win!")
+    return true;
   }
   if ($.inArray(0, boardStatus) === -1 &&
     winGame()!== true){
     alert("Tie!")
+    return true;
     }
 }
 
@@ -41,45 +69,45 @@ function randomId(){
     return randomNumber;
 }
 
-function winGame(){
-  if ( boardStatus[0] === currentPlayer
-    && boardStatus[3] === currentPlayer
-    && boardStatus[6] === currentPlayer){
+function winGame(x){
+  if ( boardStatus[0] === x
+    && boardStatus[3] === x
+    && boardStatus[6] === x){
     return true;
   }
-  if ( boardStatus[0] === currentPlayer
-    && boardStatus[1] === currentPlayer
-    && boardStatus[2] === currentPlayer){
+  if ( boardStatus[0] === x
+    && boardStatus[1] === x
+    && boardStatus[2] === x){
     return true;
   }
-  if ( boardStatus[3] === currentPlayer
-    && boardStatus[4] === currentPlayer
-    && boardStatus[5] === currentPlayer){
+  if ( boardStatus[3] === x
+    && boardStatus[4] === x
+    && boardStatus[5] === x){
     return true;
   }
-  if ( boardStatus[6] === currentPlayer
-    && boardStatus[7] === currentPlayer
-    && boardStatus[8] === currentPlayer){
+  if ( boardStatus[6] === x
+    && boardStatus[7] === x
+    && boardStatus[8] === x){
     return true;
   }
-  if ( boardStatus[2] === currentPlayer
-    && boardStatus[5] === currentPlayer
-    && boardStatus[8] === currentPlayer){
+  if ( boardStatus[2] === x
+    && boardStatus[5] === x
+    && boardStatus[8] === x){
     return true;
   }
-  if ( boardStatus[0] === currentPlayer
-    && boardStatus[4] === currentPlayer
-    && boardStatus[8] === currentPlayer){
+  if ( boardStatus[0] === x
+    && boardStatus[4] === x
+    && boardStatus[8] === x){
     return true;
   }
-  if ( boardStatus[2] === currentPlayer
-    && boardStatus[4] === currentPlayer
-    && boardStatus[6] === currentPlayer){
+  if ( boardStatus[2] === x
+    && boardStatus[4] === x
+    && boardStatus[6] === x){
     return true;
   }
-  if ( boardStatus[1] === currentPlayer
-    && boardStatus[4] === currentPlayer
-    && boardStatus[7] === currentPlayer){
+  if ( boardStatus[1] === x
+    && boardStatus[4] === x
+    && boardStatus[7] === x){
     return true;
   }
 }
