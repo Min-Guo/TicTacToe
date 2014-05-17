@@ -12,10 +12,6 @@ $("td").click(function(){
   }   
 })
 
-function updateStatus(x, y){
-  boardStatus[x] = y;
-}
-
 function insertCharacter(x){
   if (boardStatus[x] === 1){
     $("td:eq(" + x + ")").addClass("insertStyle").html("O");
@@ -24,6 +20,7 @@ function insertCharacter(x){
     $("td:eq(" + x + ")").addClass("insertStyle").html("X");
   }
 }
+
 function checkPlayer(){
   if (gameStatus(1) === true){
     resetTable();
@@ -40,6 +37,7 @@ function checkComputer(){
     resetTable();
   }
 }
+
 function resetTable(){
   boardStatus = [0,0,0,0,0,0,0,0,0];
   $("td").html("");
