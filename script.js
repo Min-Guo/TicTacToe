@@ -5,12 +5,16 @@ var boardStatus = [0,0,0,0,0,0,0,0,0];
 
 $("td").click(function(){
   if (boardStatus[$(this).data("id")] === 0){
-      var clickId = $(this).data("id");
-      boardStatus[clickId] = 1;
-      insertCharacter(clickId);
-      checkPlayer();    
+      var clickId = $(this).data("id"); 
+      updatePlayer(clickId);  
   }   
 })
+
+function updatePlayer(x){
+  boardStatus[x] = 1;
+  insertCharacter(x);
+  checkPlayer(); 
+}
 
 function insertCharacter(x){
   if (boardStatus[x] === 1){
@@ -32,6 +36,9 @@ function checkPlayer(){
   }
 }
 
+function updateComputer(){
+  // body...
+}
 function checkComputer(){
   if (gameStatus(2) === true){
     resetTable();
