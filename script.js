@@ -7,23 +7,28 @@ $("td").click(function(){
   if (boardStatus[$(this).data("id")] === 0){
       boardStatus[$(this).data("id")] = 1;
       $(this).addClass("insertStyle").html("O");
-      console.log($(this).data("id"));
-      console.log(boardStatus);
-      var a = randomId();
+      gameStatus();
+      //console.log($(this).data("id"));
+      //console.log(boardStatus);
+      var a = randomId()
       boardStatus[a]= 2;
-      console.log(a);
-      console.log(boardStatus);
-      $("td:eq(" + a + ")").addClass("insertStyle").html("X");
-      if (winGame() === true){
-          alert("Player" + currentPlayer + "  Win!")
-          console.log(winGame());
-      }
-      if ($.inArray(0, boardStatus) === -1 &&
-          winGame()!== true){
-          alert("Tie!")
-      }
+      //console.log(a);
+      //console.log(boardStatus);
+      $("td:eq(" + a + ")").addClass("insertStyle").html("X");  
   }   
 })
+
+function gameStatus(){
+  if (winGame() === true){
+    alert("Player" + currentPlayer + "  Win!")
+    console.log(winGame());
+  }
+  if ($.inArray(0, boardStatus) === -1 &&
+    winGame()!== true){
+    alert("Tie!")
+    }
+}
+
 function generateNumber(){
   return Math.floor(Math.random() * 9);
 }
