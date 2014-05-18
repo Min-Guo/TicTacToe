@@ -1,5 +1,3 @@
-var x= 1;
-
 var boardStatus = [0,0,0,0,0,0,0,0,0];
 
 
@@ -20,7 +18,7 @@ function insertCharacter(x){
   if (boardStatus[x] === 1){
     $("td:eq(" + x + ")").addClass("insertStyle").html("O");
   }
-  if (boardStatus[x] === 2){
+  if (boardStatus[x]  === 2){
     $("td:eq(" + x + ")").addClass("insertStyle").html("X");
   }
 }
@@ -29,14 +27,14 @@ function checkPlayer(){
   if (gameStatus(1) === true){
     resetTable();
   } else{
-    updateComputer();
+    var computerId = randomId();
+    updateComputer(computerId);
   }
 }
 
-function updateComputer(){
-  var computerId = randomId()
-  boardStatus[computerId]= 2;
-  insertCharacter(computerId);
+function updateComputer(x){
+  boardStatus[x]= 2;
+  insertCharacter(x);
   checkComputer(); 
 }
 

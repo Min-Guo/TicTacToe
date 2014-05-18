@@ -4,11 +4,13 @@
     text-align:center;
     border:groove;
 }
+
 .insertStyle{
 	font-size: 80px;
 	font-weight: bold;
 	font-style: normal;
 	font-family: fantasy;
+	color: #624c47;
 }
 .headerStyle{
 	text-align: center;
