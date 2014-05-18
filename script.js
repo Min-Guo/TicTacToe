@@ -1,64 +1,60 @@
 var boardStatus = [0,0,0,0,0,0,0,0,0];
 
+var player =1;
+
+var computer = 2;
 
 $("td").click(function(){
   if (boardStatus[$(this).data("id")] === 0){
-      var clickId = $(this).data("id"); 
-      updatePlayer(clickId);  
+    var clickId = $(this).data("id");
+    main(clickId);  
   }   
 })
 
-function updatePlayer(x){
-  boardStatus[x] = 1;
-  insertCharacter(x);
-  checkPlayer(); 
-}
-
-function insertCharacter(x){
-  if (boardStatus[x] === 1){
-    $("td:eq(" + x + ")").addClass("insertStyle").html("O");
-  }
-  if (boardStatus[x]  === 2){
-    $("td:eq(" + x + ")").addClass("insertStyle").html("X");
-  }
-}
-
-function checkPlayer(){
-  if (gameStatus(1) === true){
+function main(clickId){
+  handlePlay(clickId, player);
+  if (checkResult(player) === true){
     resetTable();
   } else{
     var computerId = randomId();
-    updateComputer(computerId);
+    handlePlay(computerId, computer);
+    if (checkResult(computer) === true){
+      resetTable();
+    }
   }
 }
 
-function updateComputer(x){
-  boardStatus[x]= 2;
-  insertCharacter(x);
-  checkComputer(); 
+function handlePlay(id, currentPlayer){
+  boardStatus[id] = currentPlayer;
+  insertCharacter(id);
+  return checkResult(currentPlayer); 
 }
 
-function checkComputer(){
-  if (gameStatus(2) === true){
-    resetTable();
+function insertCharacter(id){
+  if (boardStatus[id] === 1){
+    $("td:eq(" + id + ")").addClass("insertStyle").html("O");
+  }
+  if (boardStatus[id]  === 2){
+    $("td:eq(" + id + ")").addClass("insertStyle").html("X");
   }
 }
 
-function resetTable(){
-  boardStatus = [0,0,0,0,0,0,0,0,0];
-  $("td").html("");
-}
-
-function gameStatus(x){
-  if (winGame(x) === true){
-    alert("You Win!")
-    return true;
-  }
-  if ($.inArray(0, boardStatus) === -1 &&
-    winGame()!== true){
-    alert("Tie!")
+function checkResult(currentPlayer){
+  if (winGame(currentPlayer) === true){
+    if (currentPlayer === 1){
+      alert("Player Win!")
+      return true;
+    }
+    if (currentPlayer === 2){
+      alert("Computer Win!")
     return true;
     }
+  if ($.inArray(0, boardStatus) === -1 &&
+    winGame(currentPlayer)!== true){
+    alert("Tie!")
+    return true;
+  }
+  }  
 }
 
 function generateNumber(){
@@ -73,49 +69,52 @@ function randomId(){
     return randomNumber;
 }
 
-function winGame(x){
-  if ( boardStatus[0] === x
-    && boardStatus[3] === x
-    && boardStatus[6] === x){
+function winGame(currentPlayer){
+  if ( boardStatus[0] === currentPlayer
+    && boardStatus[3] === currentPlayer
+    && boardStatus[6] === currentPlayer){
     return true;
   }
-  if ( boardStatus[0] === x
-    && boardStatus[1] === x
-    && boardStatus[2] === x){
+  if ( boardStatus[0] === currentPlayer
+    && boardStatus[1] === currentPlayer
+    && boardStatus[2] === currentPlayer){
     return true;
   }
-  if ( boardStatus[3] === x
-    && boardStatus[4] === x
-    && boardStatus[5] === x){
+  if ( boardStatus[3] === currentPlayer
+    && boardStatus[4] === currentPlayer
+    && boardStatus[5] === currentPlayer){
     return true;
   }
-  if ( boardStatus[6] === x
-    && boardStatus[7] === x
-    && boardStatus[8] === x){
+  if ( boardStatus[6] === currentPlayer
+    && boardStatus[7] === currentPlayer
+    && boardStatus[8] === currentPlayer){
     return true;
   }
-  if ( boardStatus[2] === x
-    && boardStatus[5] === x
-    && boardStatus[8] === x){
+  if ( boardStatus[2] === currentPlayer
+    && boardStatus[5] === currentPlayer
+    && boardStatus[8] === currentPlayer){
     return true;
   }
-  if ( boardStatus[0] === x
-    && boardStatus[4] === x
-    && boardStatus[8] === x){
+  if ( boardStatus[0] === currentPlayer
+    && boardStatus[4] === currentPlayer
+    && boardStatus[8] === currentPlayer){
     return true;
   }
-  if ( boardStatus[2] === x
-    && boardStatus[4] === x
-    && boardStatus[6] === x){
+  if ( boardStatus[2] === currentPlayer
+    && boardStatus[4] === currentPlayer
+    && boardStatus[6] === currentPlayer){
     return true;
   }
-  if ( boardStatus[1] === x
-    && boardStatus[4] === x
-    && boardStatus[7] === x){
+  if ( boardStatus[1] === currentPlayer
+    && boardStatus[4] === currentPlayer
+    && boardStatus[7] === currentPlayer){
     return true;
   }
 }
 
-
+function resetTable(){
+  boardStatus = [0,0,0,0,0,0,0,0,0];
+  $("td").html("");
+}
 
 
