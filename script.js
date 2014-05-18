@@ -12,13 +12,11 @@ $("td").click(function(){
 })
 
 function main(clickId){
-  handlePlay(clickId, player);
-  if (checkResult(player) === true){
+  if (handlePlay(clickId, player) === true){
     resetTable();
   } else{
     var computerId = randomId();
-    handlePlay(computerId, computer);
-    if (checkResult(computer) === true){
+    if (handlePlay(computerId, computer) === true){
       resetTable();
     }
   }
