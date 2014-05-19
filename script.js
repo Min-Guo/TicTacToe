@@ -47,12 +47,14 @@ function checkResult(currentPlayer){
       alert("Computer Win!")
     return true;
     }
+  }
+
   if ($.inArray(0, boardStatus) === -1 &&
     winGame(currentPlayer)!== true){
     alert("Tie!")
     return true;
-  }
   }  
+  return false;
 }
 
 function generateNumber(){
