@@ -26,11 +26,13 @@ function main(clickId){
 }
 
 function computerId(){
-  if (selectWin() !== false){
-    return selectWin();
-  } else {
+  if (selectWin(computer) !== false){
+    return selectWin(computer);
+  } else if (selectWin(player) !== false){
+    return selectWin(player);
+  } else{
     return randomId();
-  } 
+  }
 }
 
 function handlePlay(id, currentPlayer){
@@ -132,53 +134,53 @@ function convertArr(row, column){
   return boardStatus[3 * row + column];
 }
 
-function rowWin(){
+function rowWin(play){
   for (var row = 0; row < 3; row++){
     console.log(row);
-    if (convertArr(row, 0) === 2 && convertArr(row, 1) === 2 && convertArr(row, 2) === 0){
+    if (convertArr(row, 0) === play && convertArr(row, 1) === play && convertArr(row, 2) === 0){
         return winId = row * 3 + 2;
-    } else if (convertArr(row, 0) === 2 && convertArr(row, 2) === 2 && convertArr(row, 1) === 0){
+    } else if (convertArr(row, 0) === play && convertArr(row, 2) === play && convertArr(row, 1) === 0){
         return winId = row * 3 + 1;
-    } else if (convertArr(row, 2) === 2 && convertArr(row, 1) === 2 && convertArr(row, 0) === 0){
+    } else if (convertArr(row, 2) === play && convertArr(row, 1) === play && convertArr(row, 0) === 0){
         return winId = row * 3 + 0;
     } 
   } 
   return false;
 }
 
-function columnWin(){
+function columnWin(play){
   for (var column = 0; column < 3; column++){
     console.log(column);
-    if (convertArr(0, column) === 2 && convertArr(1, column) === 2 && convertArr(2, column) === 0){
+    if (convertArr(0, column) === play && convertArr(1, column) === play && convertArr(2, column) === 0){
         return winId = 2 * 3 + column;
-    } else if (convertArr(0, column) === 2 && convertArr(2, column) === 2 && convertArr(1, column) === 0){
+    } else if (convertArr(0, column) === play && convertArr(2, column) === play && convertArr(1, column) === 0){
         return winId = 1 * 3 + column;
-    } else if (convertArr(1, column) === 2 && convertArr(2, column) === 2 && convertArr(0, column) === 0){
+    } else if (convertArr(1, column) === play && convertArr(2, column) === play && convertArr(0, column) === 0){
         return winId = 0 * 3 + column;
     } 
   } return false;
 }
 
-function digonalWin(){
-  if (convertArr(0, 0) === 2 && convertArr(1, 1) === 2 && convertArr(2, 2) === 0){
+function digonalWin(play){
+  if (convertArr(0, 0) === play && convertArr(1, 1) === play && convertArr(2, 2) === 0){
       return winId = 8;
-  } else if (convertArr(1, 1) === 2 && convertArr(2, 2) === 2 && convertArr(0, 0) === 0){
+  } else if (convertArr(1, 1) === play && convertArr(2, 2) === play && convertArr(0, 0) === 0){
       return winId = 0;
-  } else if (convertArr(0, 0) === 2 && convertArr(2, 2) === 2 && convertArr(1, 1) === 0){
+  } else if (convertArr(0, 0) === play && convertArr(2, 2) === play && convertArr(1, 1) === 0){
       return winId = 4;
-  } else if (convertArr(0, 2) === 2 && convertArr(1, 1) === 2 && convertArr(2, 0) === 0){
+  } else if (convertArr(0, 2) === play && convertArr(1, 1) === play && convertArr(2, 0) === 0){
       return winId = 6;
-  } else if (convertArr(0, 2) === 2 && convertArr(2, 0) === 2 && convertArr(1, 1) === 0){
+  } else if (convertArr(0, 2) === play && convertArr(2, 0) === play && convertArr(1, 1) === 0){
       return winId = 4;
-  } else if (convertArr(1, 1) === 2 && convertArr(2, 0) === 2 && convertArr(0, 2) === 0){
+  } else if (convertArr(1, 1) === play && convertArr(2, 0) === play && convertArr(0, 2) === 0){
       return winId = 2;
   } else{
       return false;
   }
 }
 
-function selectWin(){
-  if (rowWin() === false && columnWin() === false && digonalWin() === false){
+function selectWin(play){
+  if (rowWin(play) === false && columnWin(play) === false && digonalWin(play) === false){
     return false;
   } else{
       return winId;
