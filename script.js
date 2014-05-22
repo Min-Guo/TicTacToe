@@ -7,56 +7,56 @@ var computer = 2;
 var winId;
 
 
-$("td").click(function(){
-  if (boardStatus[$(this).data("id")] === 0){
+$("td").click(function() {
+  if (boardStatus[$(this).data("id")] === 0) {
     var clickId = $(this).data("id");
     main(clickId);  
   }   
 })
 
-function main(clickId){
-  if (handlePlay(clickId, player) === true){
+function main(clickId) {
+  if (handlePlay(clickId, player) === true) {
     resetTable();
-  } else{
+  } else {
       computerId();
-    if (handlePlay(computerId(), computer) === true){
+    if (handlePlay(computerId(), computer) === true) {
       resetTable();
       }
     }
 }
 
-function computerId(){
-  if (selectWin(computer) !== false){
+function computerId() {
+  if (selectWin(computer) !== false) {
     return selectWin(computer);
-  } else if (selectWin(player) !== false){
+  } else if (selectWin(player) !== false) {
     return selectWin(player);
-  } else{
+  } else {
     return randomId();
   }
 }
 
-function handlePlay(id, currentPlayer){
+function handlePlay(id, currentPlayer) {
   boardStatus[id] = currentPlayer;
   insertCharacter(id);
   return checkResult(currentPlayer); 
 }
 
-function insertCharacter(id){
-  if (boardStatus[id] === 1){
+function insertCharacter(id) {
+  if (boardStatus[id] === 1) {
     $("td:eq(" + id + ")").addClass("insertStyle").html("O");
   }
-  if (boardStatus[id]  === 2){
+  if (boardStatus[id]  === 2) {
     $("td:eq(" + id + ")").addClass("insertStyle").html("X");
   }
 }
 
-function checkResult(currentPlayer){
-  if (winGame(currentPlayer) === true){
-    if (currentPlayer === 1){
+function checkResult(currentPlayer) {
+  if (winGame(currentPlayer) === true) {
+    if (currentPlayer === 1) {
       alert("Player Win!")
       return true;
     }
-    if (currentPlayer === 2){
+    if (currentPlayer === 2) {
       alert("Computer Win!")
     return true;
     }
@@ -70,72 +70,72 @@ function checkResult(currentPlayer){
   return false;
 }
 
-function generateNumber(){
+function generateNumber() {
   return Math.floor(Math.random() * 9);
 }
 
-function randomId(){
+function randomId() {
   var randomNumber = generateNumber();
-  while (boardStatus[randomNumber] !== 0){
+  while (boardStatus[randomNumber] !== 0) {
     randomNumber = generateNumber()
   } 
     return randomNumber;
 }
 
-function winGame(currentPlayer){
+function winGame(currentPlayer) {
   if ( boardStatus[0] === currentPlayer
     && boardStatus[3] === currentPlayer
-    && boardStatus[6] === currentPlayer){
+    && boardStatus[6] === currentPlayer) {
     return true;
   }
   if ( boardStatus[0] === currentPlayer
     && boardStatus[1] === currentPlayer
-    && boardStatus[2] === currentPlayer){
+    && boardStatus[2] === currentPlayer) {
     return true;
   }
   if ( boardStatus[3] === currentPlayer
     && boardStatus[4] === currentPlayer
-    && boardStatus[5] === currentPlayer){
+    && boardStatus[5] === currentPlayer) {
     return true;
   }
   if ( boardStatus[6] === currentPlayer
     && boardStatus[7] === currentPlayer
-    && boardStatus[8] === currentPlayer){
+    && boardStatus[8] === currentPlayer) {
     return true;
   }
   if ( boardStatus[2] === currentPlayer
     && boardStatus[5] === currentPlayer
-    && boardStatus[8] === currentPlayer){
+    && boardStatus[8] === currentPlayer) {
     return true;
   }
   if ( boardStatus[0] === currentPlayer
     && boardStatus[4] === currentPlayer
-    && boardStatus[8] === currentPlayer){
+    && boardStatus[8] === currentPlayer) {
     return true;
   }
   if ( boardStatus[2] === currentPlayer
     && boardStatus[4] === currentPlayer
-    && boardStatus[6] === currentPlayer){
+    && boardStatus[6] === currentPlayer) {
     return true;
   }
   if ( boardStatus[1] === currentPlayer
     && boardStatus[4] === currentPlayer
-    && boardStatus[7] === currentPlayer){
+    && boardStatus[7] === currentPlayer) {
     return true;
   }
 }
 
-function resetTable(){
+function resetTable() {
   boardStatus = [0,0,0,0,0,0,0,0,0];
   $("td").html("");
 }
 
-function convertArr(row, column){
+function convertArr(row, column) {
   return boardStatus[3 * row + column];
 }
 
-function rowWin(play){
-  for (var row = 0; row < 3; row++){
+function rowWin(play) {
+  for (var row = 0; row < 3; row++) {
     console.log(row);
     if (convertArr(row, 0) === play && convertArr(row, 1) === play && convertArr(row, 2) === 0){
         return winId = row * 3 + 2;
@@ -148,8 +148,8 @@ function rowWin(play){
   return false;
 }
 
-function columnWin(play){
-  for (var column = 0; column < 3; column++){
+function columnWin(play) {
+  for (var column = 0; column < 3; column++) {
     console.log(column);
     if (convertArr(0, column) === play && convertArr(1, column) === play && convertArr(2, column) === 0){
         return winId = 2 * 3 + column;
@@ -161,28 +161,28 @@ function columnWin(play){
   } return false;
 }
 
-function digonalWin(play){
-  if (convertArr(0, 0) === play && convertArr(1, 1) === play && convertArr(2, 2) === 0){
+function digonalWin(play) {
+  if (convertArr(0, 0) === play && convertArr(1, 1) === play && convertArr(2, 2) === 0) {
       return winId = 8;
-  } else if (convertArr(1, 1) === play && convertArr(2, 2) === play && convertArr(0, 0) === 0){
+  } else if (convertArr(1, 1) === play && convertArr(2, 2) === play && convertArr(0, 0) === 0) {
       return winId = 0;
-  } else if (convertArr(0, 0) === play && convertArr(2, 2) === play && convertArr(1, 1) === 0){
+  } else if (convertArr(0, 0) === play && convertArr(2, 2) === play && convertArr(1, 1) === 0) {
       return winId = 4;
-  } else if (convertArr(0, 2) === play && convertArr(1, 1) === play && convertArr(2, 0) === 0){
+  } else if (convertArr(0, 2) === play && convertArr(1, 1) === play && convertArr(2, 0) === 0) {
       return winId = 6;
-  } else if (convertArr(0, 2) === play && convertArr(2, 0) === play && convertArr(1, 1) === 0){
+  } else if (convertArr(0, 2) === play && convertArr(2, 0) === play && convertArr(1, 1) === 0) {
       return winId = 4;
-  } else if (convertArr(1, 1) === play && convertArr(2, 0) === play && convertArr(0, 2) === 0){
+  } else if (convertArr(1, 1) === play && convertArr(2, 0) === play && convertArr(0, 2) === 0) {
       return winId = 2;
-  } else{
+  } else {
       return false;
   }
 }
 
-function selectWin(play){
-  if (rowWin(play) === false && columnWin(play) === false && digonalWin(play) === false){
+function selectWin(play) {
+  if (rowWin(play) === false && columnWin(play) === false && digonalWin(play) === false) {
     return false;
-  } else{
+  } else {
       return winId;
   }
 }
