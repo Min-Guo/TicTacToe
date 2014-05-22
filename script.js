@@ -82,46 +82,36 @@ function randomId() {
     return randomNumber;
 }
 
+function checkBoard(index1, index2, index3, currentPlayer) {
+  return boardStatus[index1] === currentPlayer 
+  && boardStatus[index2] === currentPlayer 
+  && boardStatus[index3] === currentPlayer
+}
+
 function winGame(currentPlayer) {
-  if ( boardStatus[0] === currentPlayer
-    && boardStatus[3] === currentPlayer
-    && boardStatus[6] === currentPlayer) {
-    return true;
+  if (checkBoard(0, 3, 6, currentPlayer) === true) {
+    return true
   }
-  if ( boardStatus[0] === currentPlayer
-    && boardStatus[1] === currentPlayer
-    && boardStatus[2] === currentPlayer) {
-    return true;
+  if (checkBoard(0, 1, 2, currentPlayer) === true) {
+    return true
   }
-  if ( boardStatus[3] === currentPlayer
-    && boardStatus[4] === currentPlayer
-    && boardStatus[5] === currentPlayer) {
-    return true;
+  if (checkBoard(3, 4, 5, currentPlayer) === true) {
+    return true
   }
-  if ( boardStatus[6] === currentPlayer
-    && boardStatus[7] === currentPlayer
-    && boardStatus[8] === currentPlayer) {
-    return true;
+  if (checkBoard(6, 7, 8, currentPlayer) === true) {
+    return true
   }
-  if ( boardStatus[2] === currentPlayer
-    && boardStatus[5] === currentPlayer
-    && boardStatus[8] === currentPlayer) {
-    return true;
+  if (checkBoard(2, 5, 8, currentPlayer) === true) {
+    return true
   }
-  if ( boardStatus[0] === currentPlayer
-    && boardStatus[4] === currentPlayer
-    && boardStatus[8] === currentPlayer) {
-    return true;
+  if (checkBoard(0, 4, 8, currentPlayer) === true) {
+    return true
   }
-  if ( boardStatus[2] === currentPlayer
-    && boardStatus[4] === currentPlayer
-    && boardStatus[6] === currentPlayer) {
-    return true;
+  if (checkBoard(2, 4, 6, currentPlayer) === true) {
+    return true
   }
-  if ( boardStatus[1] === currentPlayer
-    && boardStatus[4] === currentPlayer
-    && boardStatus[7] === currentPlayer) {
-    return true;
+  if (checkBoard(1, 4, 7, currentPlayer) === true) {
+    return true
   }
 }
 
