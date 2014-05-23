@@ -9,9 +9,7 @@ Player can play with a computer, and player strats fist.  This is my first small
 Packing list:
 
 tic-tac-toe.html - HTML file for the web page.
-
 script.js - Javascript that creats the game board, handles game logically.
-
 stylesheet.css - Basic styles for the page.
 
 ================================================================================
